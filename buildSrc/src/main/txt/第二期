@@ -1,0 +1,30 @@
+课程大纲：
+http://note.youdao.com/s/U0kg0nUp
+
+Spring XML配置文件验证模式：
+http://note.youdao.com/s/ceaS2hW0
+   --DTD验证模式：http://note.youdao.com/s/3jCaVXFB
+
+EntityResolver有什么作用？
+http://note.youdao.com/s/7aECLWPx
+
+lookup-method文档：
+http://note.youdao.com/s/TZpskaeo
+
+replaced-method文档：
+http://note.youdao.com/s/K3OMeOsU
+
+processOn图形
+XmlBeanFactory初始化时序图  https://www.processon.com/view/link/5f0fd2af7d9c081beab985bb
+
+XmlBeanFactory初始化时序之加载bean流程图
+https://www.processon.com/view/link/5f1111fa5653bb7fd23cd8c0
+
+Resource继承体系
+https://www.processon.com/view/link/5f0fd93a7d9c081beab98f76
+
+BeanDefinition继承体系
+https://www.processon.com/view/link/5f1167375653bb7fd23e18a4
+
+Bean标签解析及注册流程图
+https://www.processon.com/view/link/5f1168ce1e08537d50b09348

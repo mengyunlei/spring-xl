@@ -1,0 +1,24 @@
+课程大纲 https://note.youdao.com/s/B9lbvF6F
+
+1、DataSource接口
+https://www.processon.com/view/link/619f4784e0b34d5e7fd16c10
+
+2、ConnectionHolder类图
+https://www.processon.com/view/link/619f47b41efad425fd6a6bed
+
+3、TransactionAttribute 类图https://www.processon.com/view/link/619f47d10791296e0a154493
+
+4、TransactionManager
+https://www.processon.com/view/link/619f47eaf346fb7313f8c1cf
+
+5、Spring 事务对象
+https://www.processon.com/view/link/619f4800f346fb7313f8c25e
+
+6、Spring 事务状态类图
+https://www.processon.com/view/link/619f48071e0853431b117ea9
+
+7、TransactionInfo
+https://www.processon.com/view/link/619f482063768975f84c9ed0
+
+8、Spring事务标签解析阶段注册的BeanDefinition
+https://www.processon.com/view/link/619f48291e0853431b117f6b
