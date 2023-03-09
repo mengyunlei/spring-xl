@@ -1,5 +1,7 @@
 package com.xl.code.study.no_3;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * ClassName: Student
  * Description:
@@ -13,4 +15,51 @@ package com.xl.code.study.no_3;
  * @since 1.0.0
  */
 public class Student {
+	private int id;
+	private String name;
+
+	@Autowired
+	private Teacher teacher;
+
+	public Student() {
+	}
+
+	public Student(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public void start(){
+		System.out.println("student bean init method 【start()】 invoked!");
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+
+	/*学习...*/
+	public void study() {
+		System.out.println("因为学习让我们相遇...");
+	}
 }

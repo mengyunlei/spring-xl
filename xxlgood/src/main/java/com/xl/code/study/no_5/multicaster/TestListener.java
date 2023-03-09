@@ -1,5 +1,8 @@
 package com.xl.code.study.no_5.multicaster;
 
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationListener;
+
 /**
  * ClassName: TestListener
  * Description:
@@ -12,5 +15,12 @@ package com.xl.code.study.no_5.multicaster;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class TestListener {
+public class TestListener implements ApplicationListener {
+
+	@Override
+	public void onApplicationEvent(ApplicationEvent event) {
+		if(event instanceof TestEvent) {
+			((TestEvent)event).print();
+		}
+	}
 }

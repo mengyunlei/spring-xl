@@ -1,4 +1,4 @@
-package com.mrl.source.demo01;
+package com.xl.code.study.no_6.demo01;
 
 /**
  * ClassName: Animal
@@ -14,4 +14,6 @@ package com.mrl.source.demo01;
  */
 public interface Animal {
 	void eat();
+
+	void go();
 }

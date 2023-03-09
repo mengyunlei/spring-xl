@@ -12,5 +12,5 @@ package com.xl.code.study.no_2.start;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class BeanComponentA {
+public class ComponentA {
 }

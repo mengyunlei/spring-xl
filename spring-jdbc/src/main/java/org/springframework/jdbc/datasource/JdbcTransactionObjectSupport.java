@@ -188,6 +188,7 @@ public abstract class JdbcTransactionObjectSupport implements SavepointManager, 
 	public void releaseSavepoint(Object savepoint) throws TransactionException {
 		ConnectionHolder conHolder = getConnectionHolderForSavepoint();
 		try {
+			// 让数据库删除指定的 保存点..
 			conHolder.getConnection().releaseSavepoint((Savepoint) savepoint);
 		}
 		catch (Throwable ex) {

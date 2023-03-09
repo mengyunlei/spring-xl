@@ -52,6 +52,9 @@ import org.springframework.util.ClassUtils;
  */
 class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 
+
+
+
 	/**
 	 * Parses the {@code <tx:annotation-driven/>} tag. Will
 	 * {@link AopNamespaceUtils#registerAutoProxyCreatorIfNecessary register an AutoProxyCreator}
@@ -60,7 +63,12 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 	@Override
 	@Nullable
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
+		// element = <tx:annotation-driven transaction-manager="transactionManager" />
+
+		// 向Spring容器注册了一个 BD -> TransactionalEventListenerFactory.class
 		registerTransactionalEventListenerFactory(parserContext);
+
+
 		String mode = element.getAttribute("mode");
 		if ("aspectj".equals(mode)) {
 			// mode="aspectj"
@@ -70,11 +78,21 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 			}
 		}
 		else {
+
+			// 我们要分析的源码入口：
 			// mode="proxy"
 			AopAutoProxyConfigurer.configureAutoProxyCreator(element, parserContext);
+
 		}
 		return null;
 	}
+
+
+
+
+
+
+
 
 	private void registerTransactionAspect(Element element, ParserContext parserContext) {
 		String txAspectBeanName = TransactionManagementConfigUtils.TRANSACTION_ASPECT_BEAN_NAME;
@@ -119,12 +137,21 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 	private static class AopAutoProxyConfigurer {
 
 		public static void configureAutoProxyCreator(Element element, ParserContext parserContext) {
+			// 向Spring容器注册 BD -> InfrastructureAdvisorAutoProxyCreator.class ，BD的名称：
+			// org.springframework.aop.config.internalAutoProxyCreator
 			AopNamespaceUtils.registerAutoProxyCreatorIfNecessary(parserContext, element);
 
+			// 事务切面的名称：
+			// org.springframework.transaction.config.internalTransactionAdvisor
 			String txAdvisorBeanName = TransactionManagementConfigUtils.TRANSACTION_ADVISOR_BEAN_NAME;
+
+
+			// 条件成立：说明Spring容器内 不存在 事务切面 的 BD 信息..走if内的逻辑，注册 事务切面 相关的逻辑。
 			if (!parserContext.getRegistry().containsBeanDefinition(txAdvisorBeanName)) {
 				Object eleSource = parserContext.extractSource(element);
 
+
+				// 创建一个BD->AnnotationTransactionAttributeSource.class ，并给BD起了名称：annotationTransactionAttributeSource#1
 				// Create the TransactionAttributeSource definition.
 				RootBeanDefinition sourceDef = new RootBeanDefinition(
 						"org.springframework.transaction.annotation.AnnotationTransactionAttributeSource");
@@ -132,24 +159,39 @@ class AnnotationDrivenBeanDefinitionParser implements BeanDefinitionParser {
 				sourceDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
 				String sourceName = parserContext.getReaderContext().registerWithGeneratedName(sourceDef);
 
+				// 创建一个BD->TransactionInterceptor.class (事务增强器)
 				// Create the TransactionInterceptor definition.
 				RootBeanDefinition interceptorDef = new RootBeanDefinition(TransactionInterceptor.class);
 				interceptorDef.setSource(eleSource);
 				interceptorDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
+				// 向BD添加 Properties： transactionManagerBeanName -> transactionManager
+				// 添加这个properties 有什么作用？ Spring容器创建 TransactionInterceptor 实例时，会向该实例 注入 transactionManagerBeanName 属性值。
 				registerTransactionManager(element, interceptorDef);
+
+				// 向BD添加 Properties： transactionAttributeSource ->  new RuntimeBeanReference(sourceName)
+				// 添加这个properties 有什么作用？
+				// Spring容器创建 TransactionInterceptor 实例时，会向该实例 注入 annotationTransactionAttributeSource 对象。
 				interceptorDef.getPropertyValues().add("transactionAttributeSource", new RuntimeBeanReference(sourceName));
 				String interceptorName = parserContext.getReaderContext().registerWithGeneratedName(interceptorDef);
 
+				// 创建一个BD->BeanFactoryTransactionAttributeSourceAdvisor.class (事务增强器)
 				// Create the TransactionAttributeSourceAdvisor definition.
 				RootBeanDefinition advisorDef = new RootBeanDefinition(BeanFactoryTransactionAttributeSourceAdvisor.class);
 				advisorDef.setSource(eleSource);
 				advisorDef.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
+				// 向BD添加 Properties： transactionAttributeSource ->  new RuntimeBeanReference(sourceName)
+				// 添加这个properties 有什么作用？
+				// Spring容器创建 BeanFactoryTransactionAttributeSourceAdvisor 实例时，会向该实例 注入 annotationTransactionAttributeSource 对象。
 				advisorDef.getPropertyValues().add("transactionAttributeSource", new RuntimeBeanReference(sourceName));
+
+				// 向BD添加 Properties： adviceBeanName -> interceptorName
+				// 添加这个properties 有什么作用？ Spring容器创建 BeanFactoryTransactionAttributeSourceAdvisor 实例时，会向该实例 注入 interceptorName .
 				advisorDef.getPropertyValues().add("adviceBeanName", interceptorName);
 				if (element.hasAttribute("order")) {
 					advisorDef.getPropertyValues().add("order", element.getAttribute("order"));
 				}
 				parserContext.getRegistry().registerBeanDefinition(txAdvisorBeanName, advisorDef);
+
 
 				CompositeComponentDefinition compositeDef = new CompositeComponentDefinition(element.getTagName(), eleSource);
 				compositeDef.addNestedComponent(new BeanComponentDefinition(sourceDef, sourceName));

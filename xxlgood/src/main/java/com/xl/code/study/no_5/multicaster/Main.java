@@ -1,5 +1,8 @@
 package com.xl.code.study.no_5.multicaster;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: Main
  * Description:
@@ -13,4 +16,11 @@ package com.xl.code.study.no_5.multicaster;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		ApplicationContext ac =
+				new ClassPathXmlApplicationContext("spring-multicaster-test.xml");
+
+		TestEvent event = new TestEvent("", "我来了~！");
+		ac.publishEvent(event);
+	}
 }

@@ -1,4 +1,4 @@
-package com.xl.code.study.no_2;
+package com.xl.code.study.no_2.lookup_method;
 
 /**
  * ClassName: Teacher
@@ -12,7 +12,7 @@ package com.xl.code.study.no_2;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class Teacher extends lookup_method.User{
+public class Teacher extends User{
 	public void showMe(){
 		System.out.println("i am teacher");
 	}

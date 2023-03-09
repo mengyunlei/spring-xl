@@ -78,9 +78,11 @@ public class BeanFactoryAspectInstanceFactory implements MetadataAwareAspectInst
 		this.name = name;
 		Class<?> resolvedType = type;
 		if (type == null) {
+			// 使用beanName查询出来 当前 BD 的 真实 class
 			resolvedType = beanFactory.getType(name);
 			Assert.notNull(resolvedType, "Unresolvable bean type - explicitly specify the aspect class");
 		}
+
 		this.aspectMetadata = new AspectMetadata(resolvedType, name);
 	}
 

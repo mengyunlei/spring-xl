@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.multicaster;
 
+import org.springframework.context.ApplicationEvent;
+
 /**
  * ClassName: TestEvent
  * Description:
@@ -12,5 +14,19 @@ package com.xl.code.study.no_5.multicaster;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class TestEvent {
+public class TestEvent extends ApplicationEvent {
+	public String msg;
+
+	public TestEvent(Object source) {
+		super(source);
+	}
+
+	public TestEvent(Object source, String msg) {
+		super(source);
+		this.msg = msg;
+	}
+
+	public void print() {
+		System.out.println(this.msg);
+	}
 }

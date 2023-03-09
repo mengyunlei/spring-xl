@@ -1,4 +1,4 @@
-package com.mrl.source.demo01;
+package com.xl.code.study.no_6.demo01;
 
 /**
  * ClassName: Cat
@@ -16,5 +16,10 @@ public class Cat implements Animal {
 	@Override
 	public void eat() {
 		System.out.println("猫猫 吃 猫粮！");
+	}
+
+	@Override
+	public void go() {
+		System.out.println("猫猫 跑跑~！");
 	}
 }

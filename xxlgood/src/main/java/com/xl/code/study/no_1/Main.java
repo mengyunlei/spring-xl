@@ -1,4 +1,4 @@
-package com.javaxxl;
+package com.xl.code.study.no_1;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

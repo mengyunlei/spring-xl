@@ -13,4 +13,11 @@ package com.xl.code.study.no_7.demo01;
  * @since 1.0.0
  */
 public interface TestInterface {
+	void dosomeTest();
+
+	void doOtherTest();
+
+	void a();
+
+	void b();
 }

@@ -1,5 +1,11 @@
 package com.xl.code.study.no_6.demo01;
 
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * ClassName: MethodInterceptor02
  * Description:
@@ -12,5 +18,13 @@ package com.xl.code.study.no_6.demo01;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class MethodInterceptor02 {
+public class MethodInterceptor02 implements MethodInterceptor {
+	@Nullable
+	@Override
+	public Object invoke(@Nonnull MethodInvocation invocation) throws Throwable {
+		System.out.println("MethodInterceptor02 begin");
+		Object ret = invocation.proceed();
+		System.out.println("MethodInterceptor02 end");
+		return ret;
+	}
 }

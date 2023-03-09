@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.fieldEditor;
 
+import java.util.Date;
+
 /**
  * ClassName: Student
  * Description:
@@ -13,4 +15,22 @@ package com.xl.code.study.no_5.fieldEditor;
  * @since 1.0.0
  */
 public class Student {
+	private String name;
+	private Date birthday;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 }

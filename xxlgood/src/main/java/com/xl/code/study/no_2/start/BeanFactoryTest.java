@@ -1,5 +1,9 @@
 package com.xl.code.study.no_2.start;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+
 /**
  * ClassName: BeanFactoryTest
  * Description:
@@ -13,4 +17,13 @@ package com.xl.code.study.no_2.start;
  * @since 1.0.0
  */
 public class BeanFactoryTest {
+	public static void main(String[] args) {
+		BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("spring-bf.xml"));
+		Object a = beanFactory.getBean("componentA");
+		Object b = beanFactory.getBean("componentB");
+
+		System.out.println(a);
+		System.out.println(b);
+
+	}
 }

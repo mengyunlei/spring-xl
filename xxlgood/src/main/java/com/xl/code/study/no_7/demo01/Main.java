@@ -1,5 +1,8 @@
 package com.xl.code.study.no_7.demo01;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: Main
  * Description:
@@ -13,4 +16,18 @@ package com.xl.code.study.no_7.demo01;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		ApplicationContext applicationContext =
+				new ClassPathXmlApplicationContext("spring-aop-test.xml");
+
+		TestInterface test = (TestInterface) applicationContext.getBean("test");
+		test.dosomeTest();
+		System.out.println("-----");
+		test.doOtherTest();
+		System.out.println("-----");
+		test.a();
+		test.b();
+
+
+	}
 }

@@ -1,5 +1,8 @@
 package com.xl.code.study.no_5.fieldEditor;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: Main01
  * Description:
@@ -13,4 +16,10 @@ package com.xl.code.study.no_5.fieldEditor;
  * @since 1.0.0
  */
 public class Main01 {
+	public static void main(String[] args) {
+		ApplicationContext ac =
+				new ClassPathXmlApplicationContext("spring-field-editor01-test.xml");
+		Student student = (Student) ac.getBean("student");
+		System.out.println(student);
+	}
 }

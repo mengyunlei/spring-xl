@@ -13,4 +13,7 @@ package com.xl.code.study.no_7.demo02;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		System.out.println(Math.max(16, Integer.MAX_VALUE));
+	}
 }

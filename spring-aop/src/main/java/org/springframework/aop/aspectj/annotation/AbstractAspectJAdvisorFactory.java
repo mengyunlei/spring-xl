@@ -77,6 +77,7 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 	 */
 	@Override
 	public boolean isAspect(Class<?> clazz) {
+
 		return (hasAspectAnnotation(clazz) && !compiledByAjc(clazz));
 	}
 
@@ -130,24 +131,38 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 	@SuppressWarnings("unchecked")
 	@Nullable
 	protected static AspectJAnnotation<?> findAspectJAnnotationOnMethod(Method method) {
+		// 检查当前方法 是否有这些注解...
 		for (Class<?> clazz : ASPECTJ_ANNOTATION_CLASSES) {
+
 			AspectJAnnotation<?> foundAnnotation = findAnnotation(method, (Class<Annotation>) clazz);
+
 			if (foundAnnotation != null) {
 				return foundAnnotation;
 			}
+
 		}
+
 		return null;
 	}
 
+	/**
+	 * @param method 检查的当前方法
+	 * @param toLookFor 需要检查的注解类型
+	 */
 	@Nullable
 	private static <A extends Annotation> AspectJAnnotation<A> findAnnotation(Method method, Class<A> toLookFor) {
+		// 提取出来 Annotation 数据..
 		A result = AnnotationUtils.findAnnotation(method, toLookFor);
+
+		// 条件成立：说明当前方法上面定义了 指定类型的 注解
 		if (result != null) {
+			// 包装类型成为 AspectJ 类型注解。
 			return new AspectJAnnotation<>(result);
 		}
 		else {
 			return null;
 		}
+
 	}
 
 
@@ -191,9 +206,12 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 
 		public AspectJAnnotation(A annotation) {
 			this.annotation = annotation;
+			// 将Annotation类型转换为 对应 的 枚举
 			this.annotationType = determineAnnotationType(annotation);
 			try {
+				// 解析出来当前注解上定义的 切点表达式
 				this.pointcutExpression = resolveExpression(annotation);
+				// 一般情况下 argNames 咱们不配置，除非使用到 运行时匹配。
 				Object argNames = AnnotationUtils.getValue(annotation, "argNames");
 				this.argumentNames = (argNames instanceof String ? (String) argNames : "");
 			}
@@ -211,6 +229,7 @@ public abstract class AbstractAspectJAdvisorFactory implements AspectJAdvisorFac
 		}
 
 		private String resolveExpression(A annotation) {
+			// 检查 属性 “value” “pointcut”
 			for (String attributeName : EXPRESSION_ATTRIBUTES) {
 				Object val = AnnotationUtils.getValue(annotation, attributeName);
 				if (val instanceof String) {

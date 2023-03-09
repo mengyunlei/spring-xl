@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.lifecycle;
 
+import org.springframework.context.SmartLifecycle;
+
 /**
  * ClassName: DemoTwoLifeCycle
  * Description:
@@ -12,5 +14,22 @@ package com.xl.code.study.no_5.lifecycle;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class DemoTwoLifeCycle {
+public class DemoTwoLifeCycle implements SmartLifecycle {
+	private boolean running = false;
+	@Override
+	public void start() {
+		this.running = true;
+		System.out.println("demo two start!!");
+	}
+
+	@Override
+	public void stop() {
+		this.running = false;
+		System.out.println("demo two stop!!");
+	}
+
+	@Override
+	public boolean isRunning() {
+		return running;
+	}
 }

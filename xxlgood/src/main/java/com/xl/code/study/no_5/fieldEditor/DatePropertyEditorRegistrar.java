@@ -1,5 +1,10 @@
 package com.xl.code.study.no_5.fieldEditor;
 
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.PropertyEditorRegistry;
+
+import java.util.Date;
+
 /**
  * ClassName: DatePropertyEditorRegistrar
  * Description:
@@ -12,5 +17,9 @@ package com.xl.code.study.no_5.fieldEditor;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class DatePropertyEditorRegistrar {
+public class DatePropertyEditorRegistrar implements PropertyEditorRegistrar {
+	@Override
+	public void registerCustomEditors(PropertyEditorRegistry registry) {
+		registry.registerCustomEditor(Date.class, new DatePropertyEditor());
+	}
 }

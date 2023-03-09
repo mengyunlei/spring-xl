@@ -1,4 +1,4 @@
-package com.xl.code.study.no_2;
+package com.xl.code.study.no_2.lookup_method;
 
 /**
  * ClassName: User

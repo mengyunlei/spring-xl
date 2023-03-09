@@ -12,5 +12,10 @@ package com.xl.code.study.no_2.lookup_method;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class GetBeanTest {
+public abstract class GetBeanTest {
+	public void showMe() {
+		this.getBean().showMe();
+	}
+
+	public abstract User getBean();
 }

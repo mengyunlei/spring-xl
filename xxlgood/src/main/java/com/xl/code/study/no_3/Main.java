@@ -1,5 +1,7 @@
 package com.xl.code.study.no_3;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: Main
  * Description:
@@ -13,4 +15,13 @@ package com.xl.code.study.no_3;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("spring-instantiation-test.xml");
+		Student student = ac.getBean(Student.class);
+		System.out.println(student);
+
+
+		/*测试BeforeInstantiation功能*/
+//		student.study();
+	}
 }

@@ -12,5 +12,24 @@ package com.xl.code.study.no_7.demo01;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class TestImpl {
+public class TestImpl implements TestInterface {
+	@Override
+	public void dosomeTest() {
+		System.out.println("dosomeTest execute");
+	}
+
+	@Override
+	public void doOtherTest() {
+		System.out.println("doOtherTest execute");
+	}
+
+	@Override
+	public void a() {
+		System.out.println("a function execute");
+	}
+
+	@Override
+	public void b() {
+		System.out.println("b function execute");
+	}
 }

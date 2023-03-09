@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.requiredProperties;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: MyClassPathXmlApplicationContext
  * Description:
@@ -12,5 +14,17 @@ package com.xl.code.study.no_5.requiredProperties;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
-public class MyClassPathXmlApplicationContext {
+public class MyClassPathXmlApplicationContext extends ClassPathXmlApplicationContext {
+	public MyClassPathXmlApplicationContext(String... configLocations) {
+		super(configLocations);
+	}
+
+	/**
+	 * 重写AbstractApplicationContext.initPropertySources() 方法
+	 * 在此指定需要验证非空的环境变量
+	 */
+	@Override
+	protected void initPropertySources() {
+		getEnvironment().setRequiredProperties("LG_HOME");
+	}
 }

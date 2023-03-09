@@ -106,15 +106,39 @@ public class TransactionInterceptor extends TransactionAspectSupport implements 
 	}
 
 
+	// 事务增强器的入口：
+	// invocation 非常关键，后续事务增强器 向后 驱动 拦截器链时 还要使用它
 	@Override
 	@Nullable
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		// Work out the target class: may be {@code null}.
 		// The TransactionAttributeSource should be passed the target class
 		// as well as the method, which may be from an interface.
+
+		// targetClass: 需要被事务增强器 增强的 目标类,  invocation.getThis() => 目标对象  =》 目标类
 		Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
 
 		// Adapt to TransactionAspectSupport's invokeWithinTransaction...
+
+
+
+		// 	@FunctionalInterface
+		//	protected interface InvocationCallback {
+		//
+		//		@Nullable
+		//		Object proceedWithInvocation() throws Throwable;
+		//	}
+
+		// 相当于 new InvocationCallback {
+		// 	Object proceedWithInvocation {
+		// 		invocation.proceed();
+		// 	}
+		// }
+
+
+		// 参数1：目标方法
+		// 参数2：目标类
+		// 参数3：invocation::proceed ...看上面
 		return invokeWithinTransaction(invocation.getMethod(), targetClass, invocation::proceed);
 	}
 

@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.lifecycle;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ClassName: Main
  * Description:
@@ -13,4 +15,12 @@ package com.xl.code.study.no_5.lifecycle;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext ac =
+				new ClassPathXmlApplicationContext("spring-lifecycle-test.xml");
+
+		ac.start();
+
+		ac.close();
+	}
 }

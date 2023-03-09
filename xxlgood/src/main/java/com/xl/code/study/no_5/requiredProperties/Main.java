@@ -1,5 +1,7 @@
 package com.xl.code.study.no_5.requiredProperties;
 
+import org.springframework.context.ApplicationContext;
+
 /**
  * ClassName: Main
  * Description:
@@ -13,4 +15,10 @@ package com.xl.code.study.no_5.requiredProperties;
  * @since 1.0.0
  */
 public class Main {
+	public static void main(String[] args) {
+		ApplicationContext ac =
+				new MyClassPathXmlApplicationContext("spring-required-properties-test.xml");
+
+	}
+
 }
