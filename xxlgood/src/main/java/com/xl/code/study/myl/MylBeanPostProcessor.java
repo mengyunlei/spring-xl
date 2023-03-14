@@ -8,18 +8,18 @@ import org.springframework.stereotype.Component;
 public class MylBeanPostProcessor implements BeanPostProcessor {
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		if ("mylService".equals(beanName)) {
-			System.out.println("初始化前");
-		}
+//		if ("AService".equals(beanName)) {
+//			//System.out.println("初始化前");
+//		}
 
 		return bean;
 	}
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		if ("mylService".equals(beanName)) {
-			System.out.println("初始化后");
-		}
+//		if ("AService".equals(beanName)) {
+//			//System.out.println("初始化后");
+//		}
 
 		return bean;
 	}

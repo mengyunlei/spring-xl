@@ -6,16 +6,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Component
-public class AService {
+public class BService {
 	@Autowired
-	BService bService;
+	AService aService;
 
-	public AService() {
+	public BService() {
 
-	}
-
-	public void test(){
-		System.out.println("test");
 	}
 
 

@@ -1,8 +1,8 @@
 package com.xl.code.study.myl;
 
 import com.xl.code.study.AppConfig;
+import com.xl.code.study.aop.UserService;
 import com.xl.code.study.no_1.User;
-import com.xl.code.study.no_1.UserService;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -31,18 +31,13 @@ public class MylMain {
 //		beanFactory.registerBeanDefinition("user", beanDefinition);
 //		System.out.println(beanFactory.getBean("user"));
 
+		UserService userService = (UserService) context.getBean("userService");
+		userService.test();
+
 //		MylService mylService = (MylService) context.getBean("mylService");
 //		mylService.test();
 //		context.refresh();
 
 	}
 
-	@Bean
-	public ApplicationListener applicationListener() {
-		return new ApplicationListener() {
-			public void onApplicationEvent(ApplicationEvent event) {
-				System.out.println("接收到了一个事件");
-			}
-		};
-	}
 }
