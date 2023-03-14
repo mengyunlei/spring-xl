@@ -1,5 +1,7 @@
 package com.xl.code.study.no_1;
 
+import org.springframework.stereotype.Component;
+
 /**
  * ClassName: UserService
  * Description:
@@ -12,6 +14,7 @@ package com.xl.code.study.no_1;
  * 如有同学发现非 小刘讲源码 官方号传播本视频资源，请联系我！
  * @since 1.0.0
  */
+@Component
 public interface UserService {
 	User getUserById(int id);
 }

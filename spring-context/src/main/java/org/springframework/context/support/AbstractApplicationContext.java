@@ -521,7 +521,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			// 获取一个全新的BeanFactory接口实例
+			// 获取一个全新的BeanFactory接口实例 核心
+			// 1、标签(import/bean/自定义)解析成bd
+			// 2、注册到容器 beanDefinitionMap.put(beanName, beanDefinition)
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
@@ -535,10 +537,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Invoke factory processors registered as beans in the context.
 				// 查找 并 执行 bfpp 后处理器
+				// 完成对这两个接口的调用BeanDefinitionRegistryPostProcessor/BeanFactoryPostProcessor
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
-				// 注册后处理器
+				// 把实现BeanPostProcessor的类提前实例化，并加入到beanFactory
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
@@ -636,7 +639,6 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * <p>Replace any stub property sources with actual instances.
 	 * @see org.springframework.core.env.PropertySource.StubPropertySource
-	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources
 	 */
 	protected void initPropertySources() {
 		// For subclasses: do nothing by default.
