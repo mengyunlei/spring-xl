@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 @ComponentScan("com.xl.code.study")
 @EnableAspectJAutoProxy
+
 public class AppConfig {
 
 
